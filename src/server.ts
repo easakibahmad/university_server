@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import { Server } from 'http';
-import mongoose from 'mongoose';
-import app from './app';
-import config from './app/config';
+import { Server } from "http";
+import mongoose from "mongoose";
+import app from "./app";
+import config from "./app/config";
 
 let server: Server;
 
@@ -11,7 +11,7 @@ async function main() {
     await mongoose.connect(config.database_url as string);
 
     server = app.listen(config.port, () => {
-      console.log(`University app is listening on port ${config.port}`);
+      console.log(`App is listening on port ${config.port}`);
     });
   } catch (err) {
     console.log(err);
@@ -20,7 +20,7 @@ async function main() {
 
 main();
 
-process.on('unhandledRejection', (err) => {
+process.on("unhandledRejection", (err) => {
   console.log(`😈 unahandledRejection is detected , shutting down ...`, err);
   if (server) {
     server.close(() => {
@@ -30,7 +30,7 @@ process.on('unhandledRejection', (err) => {
   process.exit(1);
 });
 
-process.on('uncaughtException', () => {
+process.on("uncaughtException", () => {
   console.log(`😈 uncaughtException is detected , shutting down ...`);
   process.exit(1);
 });
